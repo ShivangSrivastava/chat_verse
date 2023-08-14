@@ -22,122 +22,120 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            "Chat Verse".text.xl5.make().py32(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: _nameController,
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value!.length < 2) {
-                            return "Name is too small";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(CupertinoIcons.person_solid),
-                          hintText: "e.g. Shivang",
-                          label: "Name".text.make(),
-                        ),
-                      ),
-                      20.heightBox,
-                      TextFormField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value!.length < 8) {
-                            return "Email is invalid";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(CupertinoIcons.mail_solid),
-                          hintText: "example@gmail.com",
-                          label: "Email".text.make(),
-                        ),
-                      ),
-                      20.heightBox,
-                      TextFormField(
-                        controller: _passwordController,
-                        keyboardType: TextInputType.visiblePassword,
-                        validator: (value) {
-                          if (value!.length < 8) {
-                            return "Password is too small";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            CupertinoIcons.lock_fill,
-                          ),
-                          hintText: "Password",
-                          label: "Password".text.make(),
-                        ),
-                      ),
-                      20.heightBox,
-                      TextFormField(
-                        controller: _confirmpasswordController,
-                        keyboardType: TextInputType.visiblePassword,
-                        validator: (value) {
-                          if (value!.length < 8) {
-                            return "Password is too small";
-                          }
-                          if (value != _passwordController.text) {
-                            return "Password mismatch";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            CupertinoIcons.lock_fill,
-                          ),
-                          hintText: "Confirm Password",
-                          label: "Confirm Password".text.make(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                20.heightBox,
-                Row(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          "Chat Verse".text.xl5.make().py32(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Form(
+                key: _formKey,
+                child: Column(
                   children: [
-                    ElevatedButton(
-                      onPressed: _signUp,
-                      child: "Sign Up".text.make(),
-                    ).expand(),
+                    TextFormField(
+                      controller: _nameController,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value!.length < 2) {
+                          return "Name is too small";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(CupertinoIcons.person_solid),
+                        hintText: "e.g. Shivang",
+                        label: "Name".text.make(),
+                      ),
+                    ),
+                    20.heightBox,
+                    TextFormField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value!.length < 8) {
+                          return "Email is invalid";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                        hintText: "example@gmail.com",
+                        label: "Email".text.make(),
+                      ),
+                    ),
+                    20.heightBox,
+                    TextFormField(
+                      controller: _passwordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      validator: (value) {
+                        if (value!.length < 8) {
+                          return "Password is too small";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          CupertinoIcons.lock_fill,
+                        ),
+                        hintText: "Password",
+                        label: "Password".text.make(),
+                      ),
+                    ),
+                    20.heightBox,
+                    TextFormField(
+                      controller: _confirmpasswordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      validator: (value) {
+                        if (value!.length < 8) {
+                          return "Password is too small";
+                        }
+                        if (value != _passwordController.text) {
+                          return "Password mismatch";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          CupertinoIcons.lock_fill,
+                        ),
+                        hintText: "Confirm Password",
+                        label: "Confirm Password".text.make(),
+                      ),
+                    ),
                   ],
                 ),
-              ],
-            ).px32(),
-            Positioned(
-              bottom: 10,
-              child: Row(
+              ),
+              20.heightBox,
+              Row(
                 children: [
-                  "Already have account?".text.make(),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: "Sign In".text.make(),
-                  ),
+                  ElevatedButton(
+                    onPressed: _signUp,
+                    child: "Sign Up".text.make(),
+                  ).expand(),
                 ],
               ),
+            ],
+          ).px32(),
+          Positioned(
+            bottom: 10,
+            child: Row(
+              children: [
+                "Already have account?".text.make(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: "Sign In".text.make(),
+                ),
+              ],
             ),
-          ],
-        ).whFull(context),
-      ),
+          ),
+        ],
+      ).whFull(context),
     );
   }
 

@@ -16,25 +16,23 @@ class _ChatHomeState extends State<ChatHome> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            [
-              "Chat Verse".text.xl5.make(),
-              IconButton(
-                onPressed: () {
-                  logout(context);
-                },
-                icon: const Icon(Icons.logout),
-              )
-            ].hStack(alignment: MainAxisAlignment.spaceBetween),
-            20.heightBox,
-            _userList().expand()
-          ],
-        ).whFull(context).p32(),
-      ),
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          [
+            "Chat Verse".text.xl5.make(),
+            IconButton(
+              onPressed: () {
+                logout(context);
+              },
+              icon: const Icon(Icons.logout),
+            )
+          ].hStack(alignment: MainAxisAlignment.spaceBetween),
+          20.heightBox,
+          _userList().expand()
+        ],
+      ).whFull(context).p32(),
     );
   }
 

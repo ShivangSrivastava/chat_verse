@@ -33,78 +33,75 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(CupertinoIcons.back),
-                ),
-                widget.name.text.xl3.make().px16()
-              ],
-            ),
-            20.heightBox,
-            StreamBuilder(
-              stream: chats,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return "Error".text.make();
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return "Loading".text.make();
-                }
-                return ListView(
-                  children:
-                      snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data()! as Map<String, dynamic>;
-                    return ChatBubble(
-                      message: data['message'],
-                      send: (FirebaseAuth.instance.currentUser?.uid ==
-                          data['senderID']),
-                      timestamp: data['timestamp'],
-                    );
-                  }).toList(),
-                );
-              },
-            ).expand(),
-            Row(
-              children: [
-                TextField(
-                  controller: _messageController,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 23,
-                    ),
-                    hintText: "Message",
+    return Scaffold(
+      body: Column(
+        children: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(CupertinoIcons.back),
+              ),
+              widget.name.text.xl3.make().px16()
+            ],
+          ),
+          20.heightBox,
+          StreamBuilder(
+            stream: chats,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return "Error".text.make();
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return "Loading".text.make();
+              }
+              return ListView(
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data =
+                      document.data()! as Map<String, dynamic>;
+                  return ChatBubble(
+                    message: data['message'],
+                    send: (FirebaseAuth.instance.currentUser?.uid ==
+                        data['senderID']),
+                    timestamp: data['timestamp'],
+                  );
+                }).toList(),
+              );
+            },
+          ).expand(),
+          Row(
+            children: [
+              TextField(
+                controller: _messageController,
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 23,
                   ),
-                ).expand(),
-                IconButton(
-                  onPressed: () {
-                    if (_messageController.text.isNotEmptyAndNotNull) {
-                      setState(() {
-                        ChatService().sendMessage(
-                            widget.recieverUID, _messageController.text);
-                        _messageController.clear();
-                      });
-                    }
-                  },
-                  icon: const Icon(
-                    Icons.send,
-                    color: Vx.green500,
-                  ),
+                  hintText: "Message",
                 ),
-              ],
-            ),
-          ],
-        ).whFull(context).p12(),
-      ),
+              ).expand(),
+              IconButton(
+                onPressed: () {
+                  if (_messageController.text.isNotEmptyAndNotNull) {
+                    setState(() {
+                      ChatService().sendMessage(
+                          widget.recieverUID, _messageController.text);
+                      _messageController.clear();
+                    });
+                  }
+                },
+                icon: const Icon(
+                  Icons.send,
+                  color: Vx.green500,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ).whFull(context).p12(),
     );
   }
 }

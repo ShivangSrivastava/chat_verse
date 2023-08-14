@@ -5,6 +5,7 @@ import 'package:velocity_x/velocity_x.dart';
 class MyTheme {
   static ThemeData darkTheme(BuildContext context) {
     return ThemeData(
+      useMaterial3: true,
       brightness: Brightness.dark,
       primarySwatch: Colors.teal,
       fontFamily: GoogleFonts.roboto().fontFamily,
